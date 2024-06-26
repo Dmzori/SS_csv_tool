@@ -105,12 +105,21 @@ class GUI:
         self.csvCol = self.csvCol_Entry.get()
         self.csvRow = Path(self.textDir).stem
         if self.cBox_Var1.get() == 1:
-            #get directory
             for file in Path(self.textDir).rglob('*.txt'):
                 self.textFile = open(file, 'r')
                 self.contents = self.textFile.read()
                 self.textFile.close()
                 self.df = pandas.read_csv(self.csvDir, index_col = [0])
+                if 'FRIGATE' in self.contents:
+                    self.df.loc[self.df['id']==self.csvRow ,self.csvCol] = '1'
+                    #need to figure out how to get the col and row of the ship 
+                    self.df.to_csv(self.csvDir)
+                if 'DESTROYER' in self.contents:
+
+                if 'CRUISER' in self.contents:
+
+                if 'CAPITAL_SHIP' in self.contents:
+                    
             #loop through files in directory
             #write to csv file
 
