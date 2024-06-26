@@ -107,7 +107,10 @@ class GUI:
         if self.cBox_Var1.get() == 1:
             #get directory
             for file in Path(self.textDir).rglob('*.txt'):
-                
+                self.textFile = open(file, 'r')
+                self.contents = self.textFile.read()
+                self.textFile.close()
+                self.df = pandas.read_csv(self.csvDir, index_col = [0])
             #loop through files in directory
             #write to csv file
 
