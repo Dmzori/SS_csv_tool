@@ -4,9 +4,8 @@ import pandas
 from pathlib import Path
 import os
 #directory mode
-#need a check button for directory mode and for starsector pref mode ie FIGHTER = 1 CORVETTE = 3 ETC
-#need to use the file dialog for directory
-#need to loop through each file in that directory then adjust the csv file depending on whats found
+#need buttons for directory mode to get the actual directory or somehow otherwise change the text/csv button functionality
+#maybe have a check in the button behavior to check if the directory mode is toggled on then react accordingly
 
 class GUI:
     def __init__(self):
@@ -111,17 +110,19 @@ class GUI:
                 self.textFile.close()
                 self.df = pandas.read_csv(self.csvDir, index_col = [0])
                 if 'FRIGATE' in self.contents:
-                    self.df.loc[self.df['id']==self.csvRow ,self.csvCol] = '1'
-                    #need to figure out how to get the col and row of the ship 
+                    #need to figure out how to get the col and row of the ship
+                    self.df.loc[self.df['id']==Path(file).stem ,'supplies/mo'] = '1' 
                     self.df.to_csv(self.csvDir)
                 if 'DESTROYER' in self.contents:
-
+                    self.df.loc[self.df['id']==Path(file).stem ,'supplies/mo'] = '3' 
+                    self.df.to_csv(self.csvDir)
                 if 'CRUISER' in self.contents:
-
+                    self.df.loc[self.df['id']==Path(file).stem ,'supplies/mo'] = '5' 
+                    self.df.to_csv(self.csvDir)
                 if 'CAPITAL_SHIP' in self.contents:
-                    
-            #loop through files in directory
-            #write to csv file
+                    self.df.loc[self.df['id']==Path(file).stem ,'supplies/mo'] = '10' 
+                    self.df.to_csv(self.csvDir)
+            
 
         if self.cBox_Var1.get() == 0:
             self.textFile = open(self.textDir, 'r')
