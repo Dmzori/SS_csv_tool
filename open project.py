@@ -4,8 +4,7 @@ import pandas
 from pathlib import Path
 import os
 #directory mode
-#need buttons for directory mode to get the actual directory or somehow otherwise change the text/csv button functionality
-#maybe have a check in the button behavior to check if the directory mode is toggled on then react accordingly
+#need function for checkbox 2 to get the directory path instead of the file path 
 
 class GUI:
     def __init__(self):
@@ -31,9 +30,12 @@ class GUI:
         #intvars
         self.cBox_Var1 = tkinter.IntVar()
         self.cBox_Var1.set(0)
+        self.cBox_Var2 = tkinter.IntVar()
+        self.cBox_Var2.set(0)
         
         #checkbutton
         self.cb1 = tkinter.Checkbutton(self.text_Frame, text = 'directory mode', variable = self.cBox_Var1)
+        self.cb2 = tkinter.Checkbutton(self.text_Frame, text = 'directory path', variabe = self.cBox_Var2)
 
         #labels
         self.textDir_Label = tkinter.Label(self.text_Frame, text = 'Text File Directory', font = ('calibre',10,'normal'))
@@ -59,6 +61,7 @@ class GUI:
 
         #pack cbuttons
         self.cb1.grid(row = 6, column = 1)
+        self.cb2.grid(row = 7, column = 1)
 
         #pack entries
         self.textDir_Entry.grid(row = 1, column = 2)
@@ -95,6 +98,10 @@ class GUI:
     def getCsvPath(self):
         path = tkinter.filedialog.askopenfilename()
         self.csvDir_Str.set(path)
+
+    def getDirPath(self): #need to make a button to run this
+        path = tkinter.filedialog.askdirectory()
+        self.textDir_Str.set(path)
     
     def run(self):
         self.textDir = self.textDir_Entry.get()
